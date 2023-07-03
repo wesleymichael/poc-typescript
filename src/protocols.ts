@@ -4,3 +4,8 @@ export type Movie = {
     genre: string;
     platform: string
 }
+
+export type ApplicationError = {
+    name: string;
+    message: string;
+};

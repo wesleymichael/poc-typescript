@@ -14,9 +14,18 @@ async function insertMovieDB(movie: Movie) {
     return results;
 }
 
+async function getMovieByNameDB(name: string){
+    const results = await db.query(`
+        SELECT * FROM "movies"
+            WHERE name = $1;
+    `, [name]);
+    return results;
+}
+
 const moviesRepository = {
     getAllMoviesDB,
     insertMovieDB,
+    getMovieByNameDB,
 }
 
 export default moviesRepository;
