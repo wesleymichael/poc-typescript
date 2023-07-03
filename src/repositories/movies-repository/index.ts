@@ -1,12 +1,22 @@
-import { connection } from "@/config/database";
+import { db } from "@/config/database";
+import { Movie } from "@/protocols";
 
 async function getAllMoviesDB(){
-    const results = await connection.query(`SELECT * FROM movies;`);
-    return results.rows;
+    const results = await db.query(`SELECT * FROM movies;`);
+    return results;
+}
+
+async function insertMovieDB(movie: Movie) {
+    const results = await db.query(`
+        INSERT INTO "movies" (name, genre, status, platform)
+            VALUES ($1, $2, $3, $4);
+    `, [movie.name, movie.genre, movie.status, movie.platform]);
+    return results;
 }
 
 const moviesRepository = {
     getAllMoviesDB,
+    insertMovieDB,
 }
 
 export default moviesRepository;

@@ -6,6 +6,7 @@ const app = express();
 app
     .use(express.json())
     .use(cors())
+    .get("/health", (_req, res) => res.send("Ok"))
     .use(moviesRouter)
 
 const PORT = process.env.PORT || 5000;
